@@ -1,0 +1,30 @@
+[
+    {
+        "category_id": "1",
+        "index": 0,
+        "originalPrice": "55,000",
+        "monitorSize": "Dell 21'' Led ",
+        "photoURL": "https://giftall.s3.amazonaws.com/uploads/images/product/product_60c583de878b2_1310525146.jpg",
+        "title": "Vivo Phone  ",
+        "discription": "> Brand:- Vivo"
+      },
+      {
+        "category_id": "2",
+        "index": 3,
+        "originalPrice": "220,000",
+        "monitorSize": "Oppo Phone",
+        "photoURL": "https://www.mobiledokan.com/wp-content/uploads/2022/08/Oppo-A57.jpg ",
+        "title": "Oppo Phone",
+        "discription": "brand:- oppo"
+      },
+      {
+        "category_id": "3",
+        "index": 5,
+        "processor": " Intel Core i5-9400F (6-core 2.9 GHz, up to 4.1 GHz)",
+        "color":"Black",
+        "monitorSize": "Product Size:375*245*20mm  ",
+        "photoURL": "https://5.imimg.com/data5/SELLER/Default/2021/12/JT/WV/WK/3185162/93591-500x500.jpg",
+        "title": " Hp Laptop 4430s",
+        "discription": "brand:- samsung "
+      }
+]
