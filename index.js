@@ -38,6 +38,7 @@ async function run(){
             const result = await productsCollection.find(query).toArray()
             res.send(result)
         })
+   
     }
     finally{}
 }
