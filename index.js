@@ -12,13 +12,8 @@ app.use(express.json())
 const category = require('./category.json')
 const product = require('./product.json')
 
-
-
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.t6zznhm.mongodb.net/?retryWrites=true&w=majority`;
-console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
 
 async function run(){
     try{
@@ -55,6 +50,13 @@ async function run(){
             const query = {email: email}
             const cursor = await buyerBookingsCollection.find(query).toArray()
             res.send(cursor)
+        })
+
+        app.delete('/reviews/:id', async(req, res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await reviewCollection.deleteOne(query)
+            res.send(result)
         })
    
     }
