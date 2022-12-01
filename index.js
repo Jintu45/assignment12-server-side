@@ -60,6 +60,35 @@ async function run(){
                 res.send(myProducts);
             })
 
+            app.put('/products/:id', async(req, res) => {
+                const id = req.params.id;
+                const query = {_id: ObjectId(id)}
+                const deleteUser = await productsCollection.deleteOne(query)
+                res.send(deleteUser)
+            })
+
+            app.put('/advertiseProducts/:id', async(req, res) => {
+                const id = req.params.id ;
+                console.log(id,'products id')
+                const filter = {_id:ObjectId(id)};
+                const options = {upsert:true};
+                const updateDoc = {
+                    $set:{
+                        advertise:'advertised'
+                    },
+                };
+                const result = await productsCollection.updateOne(filter,updateDoc,options);
+                res.send(result)
+
+            })
+
+            app.get('/advertised', async(req,res)=> {
+                // const adver = req.query.advertise;
+                const query = {advertise:"advertised"}
+                const cursor = await productsCollection.find(query).toArray()
+                res.send(cursor)
+              })
+              
 
         app.get('/bookings', async(req, res) => {
             const email = req.query.email;
