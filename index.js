@@ -50,7 +50,7 @@ async function run(){
             console.log(product);
             const result = await productsCollection.insertOne(product)
             res.send(result)
-        })
+        });
 
         // find all  my added  products by email  
             app.get('/products/:email', async(req,res)=> {
