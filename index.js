@@ -20,6 +20,7 @@ async function run(){
         const categoriesCollection = client.db('assignment12').collection('category')
         const productsCollection = client.db('assignment12').collection('products')
         const buyerBookingsCollection = client.db('assignment12').collection('bookings')
+        const usersCollection = client.db('assignment12').collection('users')
 
         app.get('/categories', async(req, res) => {
             const query = {}
@@ -51,19 +52,35 @@ async function run(){
             res.send(result)
         })
 
-        //get bookings buyer bookin data from mongodb
-        // app.get('/bookings', async (req,res)=>{
-        //     const email = req.query.email;
-        //     const query = {email: email}
-        //     const cursor = await buyerBookingsCollection.find(query).toArray()
-        //     res.send(cursor)
-        // })
-    
+        // find all  my added  products by email  
+            app.get('/products/:email', async(req,res)=> {
+                const email = req.params.email;
+                const query = {email};
+                const myProducts = await productsCollection.find(query).toArray();
+                res.send(myProducts);
+            })
+
+
         app.get('/bookings', async(req, res) => {
             const email = req.query.email;
             const query = {email: email}
             const bookings = await buyerBookingsCollection.find(query).toArray()
             res.send(bookings)
+        })
+
+        // delete user from database  
+        app.put('/users/:id', async(req,res)=> {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const deleteUser = await buyerBookingsCollection.deleteOne(query);
+            res.send(deleteUser)
+        })
+
+        // save user info in database 
+        app.post('/users', async(req,res)=> {
+            const userReq = req.body ;
+            const user = await usersCollection.insertOne(userReq);
+            res.send(user)
         })
 
         app.post('/bookings', async(req, res) => {
@@ -79,13 +96,6 @@ async function run(){
             const result = await buyerBookingsCollection.insertOne(booking)
             res.send(result)
         })
-
-        // app.delete('/bookings/:id', async(req, res)=>{
-        //     const id = req.params.id;
-        //     const query = {_id: ObjectId(id)}
-        //     const result = await buyerBookingsCollection.deleteOne(query)
-        //     res.send(result)
-        // })
 
         app.get('/reviews', async(req, res) => {
             console.log(req.query.email)
